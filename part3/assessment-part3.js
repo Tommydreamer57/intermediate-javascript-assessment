@@ -35,8 +35,9 @@ function callBinding(magicAnimals, updateAnimal, id) {
 // CODE HERE...
 
 function applyBinding(magicAnimals, updateAnimal, id) {
-    let animal = magicAnimals[id]
+    let animal = magicAnimals.filter(item => item.id === id)[0]
     // console.log(magicAnimals)
+    // console.log(animal)
     // console.log(updateAnimal.apply)
     return updateAnimal.apply(animal, ['being majestic', 'eating rainbows'])
 }
@@ -62,17 +63,13 @@ var foo;
 // CODE HERE...
 
 function promiseMe($q) {
-    return $q(function (resolve, reject) {
-        console.log(resolve)
-        setTimeout(function () {
-            console.log('it worked')
-            resolve(foo = 'bar')
-        }, 20)
-    })
+    let Q = new Promise(function (resolve, reject) {
+        setTimeout(function () { foo = 'bar'; resolve(foo)})
+    }, 20)
+    return Q
 }
 
-// promise = promiseMe('custom')
-
+console.log(promiseMe())
 
 
 // *************
@@ -95,7 +92,7 @@ function emailList($q, $http) {
         url: '/api/users'
     })
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             return response.data.map((item, i) => {
                 return item.email
             })
