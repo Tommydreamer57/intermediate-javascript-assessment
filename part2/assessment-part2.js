@@ -190,20 +190,36 @@ function forgetter(name) {
 
 function frodo(startingHungerValue, startingDangerValue) {
   return {
+    hunger: startingHungerValue,
+    danger: startingDangerValue,
     dinnerOverFire: function () {
-      let hunger = startingHungerValue - 25;
-      let danger = startingDangerValue + 40;
+      this.hunger -= 25;
+      this.danger += 40;
+
+      if (this.hunger >= 100) { this.hunger = 100}
+      if (this.hunger <= 0) { this.hunger = 0}
+
+      if (this.danger >= 100) { this.danger = 100}
+      if (this.danger <= 0) { this.danger = 0}
+
       return {
-        hunger: hunger > 0 ? hunger : 0,
-        danger: danger < 100 ? danger : 100
+        hunger: this.hunger,
+        danger: this.danger
       }
     },
     hidingInBush: function () {
-      let hunger = startingHungerValue + 35;
-      let danger = startingDangerValue - 20;
+      this.hunger += 35;
+      this.danger -= 20;
+
+      if (this.hunger >= 100) { this.hunger = 100}
+      if (this.hunger <= 0) { this.hunger = 0}
+
+      if (this.danger >= 100) { this.danger = 100 }
+      if (this.danger <= 0) { this.danger = 0}
+
       return {
-        hunger: hunger < 100 ? hunger : 100,
-        danger: danger > 0 ? danger : 0
+        hunger: this.hunger,
+        danger: this.danger
       }
     }
   }
